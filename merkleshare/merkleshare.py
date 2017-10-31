@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
+"""
+The MerkleShare entrypoint.
+"""
 import argparse
 import ipfsapi
 import sys
-import time
 
-IPFS_LOCAL_GATEWAY_HOST = 'localhost'
+IPFS_LOCAL_GATEWAY_HOST = '127.0.0.1'
 IPFS_PORT = 5001
 IPFS_LOCAL_GATEWAY_PORT = 8080
 
 
-def get_args():
+def get_args(args=sys.argv):
     """
     Extract command-line arguments.
+
+    :param args: A list of command-line arguments
+    :type args: list
+    :returns: A command-line argument namespace
+    :rtype: Namespace
     """
     p = argparse.ArgumentParser()
     p.add_argument('input_file', nargs='?', default=None,
@@ -28,49 +34,46 @@ def get_args():
         choices=['hash', 'regular', 'gateway', 'local']
     )
 
-    return p.parse_args()
+    return p.parse_args(args[1:])
 
 
-ARGS = get_args()
-
-
-def connect(host=IPFS_LOCAL_GATEWAY_HOST, port=IPFS_PORT):
+def connect(host=IPFS_LOCAL_GATEWAY_HOST, port=IPFS_PORT, verbose=False):
     """
-    Keep trying to connect to an IPFS instance
+    Connect to an IPFS instance
+
+    :param host: The host of the gateway you want to reach
+    :type host: str
+    :param port: The port of the gateway you want
+    :type port: int
+
+    :returns: An ipfsapi client instance
+    :rtype: ipfsapi.Client
     """
-    retries = 1
-    while True:
-        try:
-            if ARGS.verbose:
-                sys.stderr.write('Connecting... \n')
-                sys.stderr.flush()
+    try:
+        if verbose:
+            sys.stderr.write('Connecting... \n')
+            sys.stderr.flush()
 
-            api = ipfsapi.connect(host, port)
-            if retries > 1:
-                sys.stderr.write('Connected after %d retries\n' % retries)
-            break
+        api = ipfsapi.connect(host, port)
 
-        except Exception as e:
-            sys.stderr.write('Could not connect! Are you sure that the ipfs\n')
-            sys.stderr.write(
-                'daemon is running?' +
-                ' Retrying in %d seconds...\n' % 2 ** retries)
+    except Exception as e:
+        sys.stderr.write('Could not connect! Are you sure that the ' +
+                         'ipfs daemon is running?\n')
+        sys.exit(1)
 
-            time.sleep(2 ** retries)
-            retries += 1
-
-    if ARGS.verbose:
+    if verbose:
         sys.stderr.write('connected to the API.\n')
 
     return api
 
 
 def main():
-    api = connect()
+    args = get_args()
+    api = connect(verbose=args.verbose)
 
     # Read stdin...
-    if ARGS.input_file is None:
-        if ARGS.verbose:
+    if args.input_file is None:
+        if args.verbose:
             sys.stderr.write(
                 'Waiting for standard input... ' +
                 '(type your doc and press Ctrl+D)\n'
@@ -79,14 +82,14 @@ def main():
         addr = api.add_str(sys.stdin.read())
     # ...or the specified file
     else:
-        addr = api.add(ARGS.input_file)['Hash']
+        addr = api.add(args.input_file)['Hash']
 
-    if ARGS.verbose:
+    if args.verbose:
         sys.stderr.write('\nDone handling input.')
 
     print()
 
-    if ARGS.all:
+    if args.all:
         sys.stderr.write('Your document is available at:\n')
         sys.stderr.write('Hash: %s\n' % addr)
         sys.stderr.write('Regular: /ipfs/%s\n' % addr)
@@ -102,11 +105,11 @@ def main():
     sys.stderr.flush()
 
     # Decide which link to print to stdout
-    if ARGS.link_type == 'hash':
+    if args.link_type == 'hash':
         print(addr)
-    elif ARGS.link_type == 'regular':
+    elif args.link_type == 'regular':
         print('/ipfs/%s' % addr)
-    elif ARGS.link_type == 'gateway':
+    elif args.link_type == 'gateway':
         print('https://ipfs.io/ipfs/%s' % addr)
     else:
         print('http://%s:%d/ipfs/%s' %

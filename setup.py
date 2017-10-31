@@ -16,14 +16,18 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as readme_file:
 with open(path.join(here, 'HISTORY.rst'), encoding='utf-8') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
-requirements = [
+setup_requirements = [
+        'pytest-runner'
+        ]
+
+install_requirements = [
     # TODO: put package requirements here
     'ipfsapi',
 ]
 
 test_requirements = [
     # TODO: put package test requirements here
-    'ipfsapi'
+    'pytest'
 ]
 
 setup(
@@ -38,23 +42,22 @@ setup(
     packages=find_packages(exclude=['contrib', 'docs', 'tests']),
     entry_points={
         'console_scripts': [
-            'mersh=merkleshare.main:main',
+            'mersh=merkleshare.merkleshare:main',
         ],
     },
     include_package_data=True,
-    install_requires=requirements,
+    install_requires=install_requirements,
+    setup_requires=setup_requirements,
     license="MIT",
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        "Programming Language :: Python :: 2",
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
         'Programming Language :: Python :: 3.5',
+        'Programming Language :: Python :: 3.6',
     ],
     test_suite='tests',
     tests_require=test_requirements,

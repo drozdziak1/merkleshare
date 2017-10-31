@@ -8,18 +8,14 @@ test_merkleshare
 Tests for `merkleshare` module.
 """
 
-import unittest
 
-import merkleshare
+from merkleshare import merkleshare
 
 
-class TestMerkleshare(unittest.TestCase):
+TEST_FILENAME = 'test.txt'
 
-    def setUp(self):
-        pass
 
-    def test_something(self):
-        assert(merkleshare.__version__)
+def test_get_args_with_file():
+    args = merkleshare.get_args(args=['merkleshare', TEST_FILENAME])
 
-    def tearDown(self):
-        pass
+    assert args.input_file == TEST_FILENAME

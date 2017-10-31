@@ -14,7 +14,7 @@ A no-brainer pastebin on IPFS - think distributed sprunge.us
 * Documentation: (COMING SOON!) https://merkleshare.readthedocs.org.
 
 Why this if there's ``ipfs add``?
--------------------------------
+---------------------------------
 Good question! ``ipfs add`` currently doesn't support showing a full link, let alone
 ``xclip``-compatible output - the user has to select the hash, paste it in a browser
 and manually add the rest of their preferred IPFS link format.
@@ -29,8 +29,8 @@ Features
   * Gateway: ``https://ipfs.io/ipfs/<hash>`` - great for sharing links with non-IPFS friends
   * Local: ``http://localhost:8080/ipfs/<hash>``
   * Bare: ``<hash>``
-  
+
 Planned Features
 ----------------
-* (optional) static WebUI 
+* (optional) static WebUI
 * Clipboard support
