@@ -13,10 +13,16 @@ Contents:
 
    readme
    installation
-   usage
    contributing
    authors
    history
+
+Code documentation:
+
+.. toctree::
+   :maxdepth: 2
+
+   modules
 
 Indices and tables
 ==================
