@@ -80,14 +80,13 @@ def main():
             )
             sys.stderr.flush()
         addr = api.add_str(sys.stdin.read())
+        sys.stderr.write('\n')
     # ...or the specified file
     else:
         addr = api.add(args.input_file)['Hash']
 
     if args.verbose:
-        sys.stderr.write('\nDone handling input.')
-
-    print()
+        sys.stderr.write('\nDone handling input.\n')
 
     if args.all:
         sys.stderr.write('Your document is available at:\n')
