@@ -9,7 +9,7 @@ MerkleShare
         :target: https://pypi.python.org/pypi/merkleshare
 
 
-A no-brainer pastebin on IPFS - think distributed sprunge.us
+A no-brainer pastebin on IPFS - think distributed http://sprunge.us
 
 * Documentation: (COMING SOON!) https://merkleshare.readthedocs.org.
 
