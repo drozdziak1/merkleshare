@@ -57,3 +57,4 @@ Planned Features
 ----------------
 * (optional) static WebUI
 * Clipboard support
+* Encryption
