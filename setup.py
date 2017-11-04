@@ -16,25 +16,24 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as readme_file:
 with open(path.join(here, 'HISTORY.rst'), encoding='utf-8') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
+with open(path.join(here, 'requirements_test.txt'), encoding='utf-8') as reqs:
+    test_requirements = reqs.read().split('\n')
+
 setup_requirements = [
-        'pytest-runner'
-        ]
+    'pytest-runner',
+]
 
 install_requirements = [
-    # TODO: put package requirements here
     'ipfsapi',
 ]
 
-test_requirements = [
-    # TODO: put package test requirements here
-    'pytest'
-]
 
 setup(
     name='merkleshare',
     version=versioneer.get_version(),
     cmdclass=versioneer.get_cmdclass(),
-    description="A no-brainer pastebin on IPFS - think distributed sprunge.us",
+    description="A no-brainer pastebin on IPFS - " +
+    "think distributed http://sprunge.us",
     long_description=readme + '\n\n' + history,
     author="Stanislaw Drozd",
     author_email='drozdziak1@gmail.com',

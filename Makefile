@@ -67,4 +67,4 @@ dist: clean
 	ls -l dist
 
 install: clean
-	python setup.py install
+	pip install .
