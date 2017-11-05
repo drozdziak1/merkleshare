@@ -24,6 +24,8 @@ setup_requirements = [
 ]
 
 install_requirements = [
+    'base58',
+    'cryptography',
     'ipfsapi',
 ]
 
