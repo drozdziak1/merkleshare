@@ -16,8 +16,7 @@ def get_args(args=sys.argv):
     """
     Extract command-line arguments.
 
-    :param args: A list of command-line arguments
-    :type args: list
+    :param list args: A list of command-line arguments
     :returns: A command-line argument namespace
     :rtype: Namespace
     """
@@ -41,10 +40,8 @@ def connect(host=IPFS_LOCAL_GATEWAY_HOST, port=IPFS_PORT, verbose=False):
     """
     Connect to an IPFS instance
 
-    :param host: The host of the gateway you want to reach
-    :type host: str
-    :param port: The port of the gateway you want
-    :type port: int
+    :param str host: The host of the gateway you want to reach
+    :param int port: The port of the gateway you want
 
     :returns: An ipfsapi client instance
     :rtype: ipfsapi.Client
