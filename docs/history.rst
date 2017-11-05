@@ -1,5 +1,9 @@
 .. include:: ../HISTORY.rst
 
+0.2.0
+-----
+Add encryption.
+
 0.1.3
 -----
 Things start looking more coherent, up to this point changes are mostly docs-

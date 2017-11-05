@@ -17,13 +17,15 @@ with open(path.join(here, 'HISTORY.rst'), encoding='utf-8') as history_file:
     history = history_file.read().replace('.. :changelog:', '')
 
 with open(path.join(here, 'requirements_test.txt'), encoding='utf-8') as reqs:
-    test_requirements = reqs.read().split('\n')
+    test_requirements = reqs.read().split('\n')[:-1]
 
 setup_requirements = [
     'pytest-runner',
 ]
 
 install_requirements = [
+    'base58',
+    'cryptography',
     'ipfsapi',
 ]
 
