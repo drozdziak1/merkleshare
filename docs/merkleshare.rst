@@ -1,6 +1,13 @@
 merkleshare package
 ===================
 
+Subpackages
+-----------
+
+.. toctree::
+
+    merkleshare.webui
+
 Submodules
 ----------
 

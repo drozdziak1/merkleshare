@@ -1,5 +1,9 @@
 .. include:: ../HISTORY.rst
 
+0.3.0
+-----
+Add WebUI
+
 0.2.0
 -----
 Add encryption.

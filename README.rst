@@ -17,9 +17,23 @@ Good question! ``ipfs add`` currently doesn't support showing a full link, let a
 ``xclip``-compatible output - the user has to select the hash, paste it in a browser
 and manually add the rest of their preferred IPFS link format.
 
+Installation
+------------
+``merkleshare`` is available through PyPI:
+
+.. code-block:: bash
+
+   $ pip install merkleshare
+
+But if you want, you can install it directly from the repo:
+
+.. code-block:: bash
+
+   $ pip install git+https://github.com/drozdziak1/merkleshare
+
+
 Usage
 -----
-
 A typical stdin pipe situation:
 
 .. code-block:: bash
@@ -42,14 +56,15 @@ Or maybe you only need the hash? No problem:
    $ echo "Rollin' with the hash\!" | mersh -t hash
    QmWjZ4dF4brEPqjtWx2EqZbeAmcpHiCVkhAxJyi51TPJzh
 
-Got security needs? Merkleshare's got you covered:
+Got security needs? You'll be happy to know that MerkleShare supports Fernet
+encryption (via the ``cryptography`` module):
 
 .. code-block:: bash
 
    $ echo "Lizard people live at the edge of flat earth" | mersh -e
    /ipfs/QmcXM8gCqeJA2qjnVmFYkFFc2sMjDvT21p8UwGBwzWxva8/#fT7jn4eDJLgHcM3wva4KS4eUMyJ19zuxRJhy5Lp5xwZsVzA4Q6AzoEEEZxUt
-                                                         `----------------------------------------------------------'
-                                                                 Your data is guarded by a disposable secret
+                                                        # `----------------------------------------------------------'
+                                                        #        Your data is guarded by a disposable secret
 
 It's not possible to reach your data without the secret, which is only present
 in the link, but if you do have it...
@@ -77,8 +92,8 @@ Features
   * Gateway: ``https://ipfs.io/ipfs/<hash>`` - great for sharing links with non-IPFS friends
   * Local: ``http://localhost:8080/ipfs/<hash>``
   * Bare: ``<hash>``
+* Static WebUI (The ``-g`` flag)
 
 Planned Features
 ----------------
-* (optional) static WebUI
 * built-in clipboard support

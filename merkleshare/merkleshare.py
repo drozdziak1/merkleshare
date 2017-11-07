@@ -3,6 +3,8 @@
 """
 The MerkleShare entrypoint.
 """
+
+# Externatl imports
 import argparse
 import errno
 import ipfsapi
@@ -11,10 +13,15 @@ import sys
 
 from base58 import b58encode, b58decode
 from cryptography.fernet import Fernet
+from morphys import ensure_bytes, ensure_unicode
+
+# Local imports
+from .webui import render
 
 IPFS_LOCAL_GATEWAY_HOST = '127.0.0.1'
 IPFS_PORT = 5001
 IPFS_LOCAL_GATEWAY_PORT = 8080
+WEBUI_KEY_PREFIX = 'webui:'
 
 
 def get_args(args=sys.argv):
@@ -27,17 +34,19 @@ def get_args(args=sys.argv):
     """
     p = argparse.ArgumentParser()
     p.add_argument('-a', default=False, dest='all', action='store_true',
-                   help='print all link types to stderr')
+                   help='Print all link types to stderr')
     p.add_argument('-d', default=None, dest='download_link',
                    metavar='LINK/#KEY',
-                   help='download content under LINK (optionally encrypted ' +
+                   help='Download content under LINK (optionally encrypted ' +
                    'using KEY); Note: links of format \'LINK/#webui:KEY\' ' +
                    'are meant to be visited from a browser.',
                    nargs=1)
     p.add_argument('-e', default=False, dest='encrypt', action='store_true',
-                   help='encrypt ')
+                   help='Encrypt')
+    p.add_argument('-g', default=False, dest='webui', action='store_true',
+                   help='Wrap the input in a static WebUI (implies -e)')
     p.add_argument('-v', default=False, dest='verbose', action='store_true',
-                   help='be verbose')
+                   help='Be verbose')
     p.add_argument(
         '-t', default='regular', dest='link_type',
         help='link type to print to stdout',
@@ -80,7 +89,7 @@ def connect(host=IPFS_LOCAL_GATEWAY_HOST, port=IPFS_PORT, verbose=False):
 
 
 def upload(api, input_file=sys.stdin, verbose=False,
-           encrypt=False):
+           encrypt=False, webui=False):
     """
     Upload and (optionally) encrypt a specified file.
 
@@ -108,14 +117,27 @@ def upload(api, input_file=sys.stdin, verbose=False,
         with open(input_file, 'rb') as f:
             file_contents = f.read()
 
-    if encrypt:
+    suffix = ''
+    if encrypt or webui:  # WebUI implies encryption
         secret = Fernet.generate_key()
+        if verbose:
+            sys.stderr.write("Using secret %r...\n" % secret)
         cipher = Fernet(secret)
-        addr = api.add_bytes(cipher.encrypt(file_contents)) + \
-            '/#' + b58encode(secret)
+        file_contents = cipher.encrypt(ensure_bytes(file_contents))
 
-    else:
-        addr = api.add_bytes(file_contents)
+        # Convert the secret to base58 for consistence
+        secret58 = b58encode(secret)
+
+        suffix += '/#'
+
+        if webui:
+            file_contents = render(ensure_unicode(
+                file_contents), verbose=verbose)
+            suffix += WEBUI_KEY_PREFIX
+
+        suffix += secret58
+
+    addr = api.add_bytes(ensure_bytes(file_contents)) + suffix
 
     return addr
 
@@ -165,7 +187,7 @@ def main():
 
     if args.download_link is None:
         addr = upload(api, args.input_file, verbose=args.verbose,
-                      encrypt=args.encrypt)
+                      encrypt=args.encrypt, webui=args.webui)
 
         if args.verbose:
             sys.stderr.write('\nDone handling input.\n')

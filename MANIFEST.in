@@ -14,3 +14,5 @@ include versioneer.py
 include merkleshare/_version.py
 
 include requirements_test.txt
+
+recursive-include merkleshare/webui/output *.html

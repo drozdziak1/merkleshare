@@ -1,0 +1,19 @@
+{
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/drozdziak1/merkleshare"
+    },
+    "dependencies": {
+        "fernet": "*",
+        "html-webpack-inline-source-plugin": "*",
+        "html-webpack-plugin": "*",
+        "webpack": "*",
+        "bs58": "*"
+    },
+    "devDependencies": {},
+    "name": "merkleshare",
+    "scripts": {
+        "install": "rm -rf merkleshare/webui/output && mkdir -p merkleshare/webui/output && cp merkleshare/webui/index.html merkleshare/webui/output && webpack --config ./webpack.config.js"
+    }
+}
