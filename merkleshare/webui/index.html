@@ -9,13 +9,15 @@
 }
 
 #cleartext {
-  display: inline;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
 }
     </style>
   </head>
   <body>
+    <textarea readonly id="cleartext"></textarea>
     <div id="ciphertext">{{ ciphertext }}</div>
-    <div id="cleartext">
-    </div>
   </body>
 </html>
