@@ -31,6 +31,10 @@ But if you want, you can install it directly from the repo:
 
    $ pip install git+https://github.com/drozdziak1/merkleshare
 
+Requirements
+------------
+In order for MerkleShare to work, you need to bring up a local IPFS node using
+``ipfs daemon``.
 
 Usage
 -----
@@ -96,4 +100,7 @@ Features
 
 Planned Features
 ----------------
-* built-in clipboard support
+* Built-in clipboard support
+* Pure Python IPFS backend (once ``py-ipfs`` is ready)
+* Clipboard copy button in the WebUI
+* Binary blob support for WebUI uploads
