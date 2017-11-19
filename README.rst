@@ -71,24 +71,26 @@ encryption (via the ``cryptography`` module):
                                                         #        Your data is guarded by a disposable secret
 
 It's not possible to reach your data without the secret, which is only present
-in the link, but if you do have it...
+in the link...
 
 .. code-block:: bash
 
    $ ipfs cat /ipfs/QmcXM8gCqeJA2qjnVmFYkFFc2sMjDvT21p8UwGBwzWxva8
    gAAAAABaAMt-gZCub5HYjOXvGbNZP7GaBDJL1ViYFSX9LiWAZAVLK6_o5I2lO3Bq86yHEvmuq-iI179Ficnzwvxug--9_xKFwfXzmv6NUm9tIFf64ukMETuwhWKJJJh9ytmsPJZaRPyA
 
-...then retrieving your stuff with MerkleShare becomes about as easy as it gets:
+...but if you do have it then retrieving your stuff with MerkleShare becomes
+about as easy as it gets:
 
 .. code-block:: bash
 
    $ mersh -d /ipfs/QmcXM8gCqeJA2qjnVmFYkFFc2sMjDvT21p8UwGBwzWxva8/#fT7jn4eDJLgHcM3wva4KS4eUMyJ19zuxRJhy5Lp5xwZsVzA4Q6AzoEEEZxUt
-   Lizard people live at the edge of flat earth
+   Lizard people live at the edge of flat Earth
 
 Features
 --------
 * Read from ``stdin`` or a specified file
-* Only the link gets printed to ``stdout``, everything else is ``stderr`` - effortlessly pipe it to your favourite clipboard manager!
+* Only the link gets printed to ``stdout``, everything else is ``stderr`` -
+  effortlessly pipe it to your favourite clipboard manager!
 * Seamless data encryption
 * Output the link in the format you need:
 
