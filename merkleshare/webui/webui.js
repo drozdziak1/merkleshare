@@ -20,3 +20,22 @@ var cleartext = token.decode();
 document.getElementById('cleartext').innerHTML = cleartext;
 
 console.log('Got cleartext:\n' + cleartext);
+
+window.copy_btn_click = function(id) {
+  document.getElementById(id).select();
+  document.execCommand('copy');
+  console.log('Copied ' + id + ' to clipboard!');
+
+  var button = document.getElementById('copy-button')
+  var before = button.getAttribute('value');
+
+  // Display "Copied!" inside the button for 2 seconds
+  button.setAttribute('value', 'Copied!');
+  setTimeout(
+    function() {
+      button.setAttribute('value', before);
+    },
+    2000
+  );
+
+};

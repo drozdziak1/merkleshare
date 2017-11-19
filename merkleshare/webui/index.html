@@ -74,6 +74,13 @@ html, body {
   height: 100mm;
 }
 
+#copy-button {
+  display: block;
+  margin-bottom: 3mm;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 #logo-ipfs {
   position: absolute;
   top: 50%;
@@ -105,6 +112,8 @@ html, body {
         <p id="subtitle">A no-brainer distributed pastebin</p>
       </div>
       <div id="body">
+        <input id="copy-button" type="button" value="Copy to clipboard"
+                                              onclick="copy_btn_click('cleartext')">
         <textarea readonly id="cleartext"></textarea>
       </div>
       <div id="footer">

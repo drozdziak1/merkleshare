@@ -98,11 +98,10 @@ Features
   * Gateway: ``https://ipfs.io/ipfs/<hash>`` - great for sharing links with non-IPFS friends
   * Local: ``http://localhost:8080/ipfs/<hash>``
   * Bare: ``<hash>``
-* Static WebUI (The ``-g`` flag)
+* Optional static WebUI (Enabled with the ``-g`` flag)
 
 Planned Features
 ----------------
 * Built-in clipboard support
 * Pure Python IPFS backend (once ``py-ipfs`` is ready)
-* Clipboard copy button in the WebUI
 * Binary blob support for WebUI uploads

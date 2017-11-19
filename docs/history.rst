@@ -1,5 +1,9 @@
 .. include:: ../HISTORY.rst
 
+0.4.0
+-----
+Add a clipboard copy button to the WebUI
+
 0.3.0
 -----
 Add WebUI
