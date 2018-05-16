@@ -62,6 +62,9 @@ target/
 #Ipython Notebook
 .ipynb_checkpoints
 
-#node modules
+# node modules
 node_modules/
 merkleshare/webui/output
+
+# pytest cache
+.pytest_cache
