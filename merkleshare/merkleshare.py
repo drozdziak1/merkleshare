@@ -135,7 +135,7 @@ def upload(api, input_file=sys.stdin, verbose=False,
                 file_contents), verbose=verbose)
             suffix += WEBUI_KEY_PREFIX
 
-        suffix += secret58
+        suffix += ensure_unicode(secret58)
 
     addr = api.add_bytes(ensure_bytes(file_contents)) + suffix
 
