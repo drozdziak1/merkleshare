@@ -1,4 +1,9 @@
 ===============================
+KINDA IMPORTANT SECURITY NOTICE
+===============================
+[2018-10-09 11:12:00 CEST] - GitHub just told me that some dep related to random numbers is borked. MerkleShare is using encryption provided by the ``fernet`` package. I'll try to fix this ASAP, but please be warned that your encrypted MerkleShare uploads may not be safe!
+
+===============================
 MerkleShare
 ===============================
 
