@@ -5,13 +5,15 @@
         "url": "https://github.com/drozdziak1/merkleshare"
     },
     "dependencies": {
+        "bs58": "*",
         "fernet": "*",
-        "html-webpack-inline-source-plugin": "*",
-        "html-webpack-plugin": "*",
-        "webpack": "*",
-        "bs58": "*"
+        "html-webpack-inline-source-plugin": "0.0.10",
+        "html-webpack-plugin": "^3.2.0",
+        "webpack": "^4.29.3"
     },
-    "devDependencies": {},
+    "devDependencies": {
+        "webpack-cli": "^3.2.3"
+    },
     "name": "merkleshare",
     "scripts": {
         "install": "rm -rf merkleshare/webui/output && mkdir -p merkleshare/webui/output && cp merkleshare/webui/index.html merkleshare/webui/output && webpack --config ./webpack.config.js"
